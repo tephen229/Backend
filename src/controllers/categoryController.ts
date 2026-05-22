@@ -16,15 +16,15 @@ export const getAllCategories = async (req: Request, res: Response) => {
 // 2. CREATE CATEGORY (Pastikan bagian ini menangkap 'nama')
 export const createCategory = async (req: Request, res: Response) => {
   try {
-    const { nama } = req.body; // ← Menangkap 'nama' dari frontend
+    const { name } = req.body; // ← Menangkap 'nama' dari frontend
 
-    if (!nama) {
+    if (!name) {
       return res.status(400).json({ message: "Nama kategori wajib diisi" });
     }
 
     const newCategory = await prisma.category.create({
       data: {
-        nama: nama, // ← Simpan ke kolom 'nama' di schema.prisma
+        nama: name, // ← Simpan ke kolom 'nama' di schema.prisma
       },
     });
 
