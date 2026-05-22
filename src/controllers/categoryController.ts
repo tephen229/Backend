@@ -53,11 +53,11 @@ export const getCategoryById = async (req: Request, res: Response) => {
 export const updateCategoryById = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
-    const { nama } = req.body;
+    const { name } = req.body;
 
     const updatedCategory = await prisma.category.update({
       where: { id },
-      data: { nama },
+      data: { name },
     });
 
     res.json(updatedCategory);
