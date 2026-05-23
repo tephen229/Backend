@@ -7,7 +7,14 @@ import pembicaraRoute from './routes/pembicaraRoute.js';
 const app = express();
 const port = 3000;
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173', 
+    'https://frontend-roan-theta-25.vercel.app'
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -20,11 +27,8 @@ app.use("/speakers", pembicaraRoute);
 
 
 // Di local tetap jalan pakai port 3000, di Vercel otomatis di-export sebagai modul serverless
-if (process.env.NODE_ENV !== 'production') {
-  const port = 3000;
-  app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-  });
-}
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
 
 export default app;
