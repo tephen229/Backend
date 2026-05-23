@@ -7,14 +7,7 @@ import pembicaraRoute from './routes/pembicaraRoute.js';
 const app = express();
 const port = 3000;
 
-app.use(cors({
-  origin: [
-    'http://localhost:5173', 
-    'https://frontend-roan-theta-25.vercel.app'
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
