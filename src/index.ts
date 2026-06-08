@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
+app.use("/", authRoute);
 app.use("/events", eventRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/speakers", pembicaraRoute);

@@ -30,12 +30,12 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
 
     // Simpan ke database ke dalam tabel/model 'users'
     const newUser = await prisma.users.create({
-      data: {
-        username,
-        password: hashedPassword,
-        foto: foto || "", // Jika foto kosong, berikan string kosong
-      },
-    });
+    data: {
+    username,
+    password: hashedPassword,
+    foto: foto || "", // Berikan string kosong jika tidak diisi agar klop dengan skema String (bukan String?)
+  },
+});
 
     // Kirim respons sukses tanpa password demi keamanan
     res.status(201).json({
@@ -119,12 +119,26 @@ export const updateUserById = async (req: Request, res: Response): Promise<void>
 };
 
 // 5. HAPUS USER
-export const deleteUserById = async (req: Request, res: Response): Promise<void> => {
+export const deleteUserById = async (req: Request, res: Response) => {
   try {
-    const id = Number(req.params.id);
-    await prisma.users.delete({ where: { id } });
-    res.json({ message: `User dengan ID ${id} berhasil dihapus` });
+    const { id } = req.params;
+
+    await prisma.users.delete({
+      where: {
+        id: Number(id), // Konversi id string dari URL menjadi Number
+      },
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "User berhasil dihapus",
+    });
   } catch (error) {
-    res.status(500).json({ message: "Gagal menghapus user atau user tidak ditemukan", error });
+    console.error("Error deleteUserById:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Gagal menghapus user",
+      error,
+    });
   }
 };
