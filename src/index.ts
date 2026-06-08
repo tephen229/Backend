@@ -4,6 +4,7 @@ import eventRoutes from './routes/eventRoute.js';
 import categoryRoutes from './routes/categoryRoute.js';
 import pembicaraRoute from './routes/pembicaraRoute.js';
 import usersRoute from './routes/usersRoute.js';
+import authRoute from "./routes/authRoute.js";
 
 const app = express();
 const port = 3000;
