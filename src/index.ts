@@ -3,6 +3,7 @@ import cors from 'cors';
 import eventRoutes from './routes/eventRoute.js';
 import categoryRoutes from './routes/categoryRoute.js';
 import pembicaraRoute from './routes/pembicaraRoute.js';
+import usersRoute from './routes/usersRoute.js';
 
 const app = express();
 const port = 3000;
@@ -15,8 +16,9 @@ app.get('/', (req, res) => {
 });
 
 app.use("/events", eventRoutes);
-app.use("/categories", categoryRoutes); // Endpoint: http://localhost:3000/categories
+app.use("/categories", categoryRoutes);
 app.use("/speakers", pembicaraRoute);
+app.use("/users", usersRoute);
 
 
 // Di local tetap jalan pakai port 3000, di Vercel otomatis di-export sebagai modul serverless
